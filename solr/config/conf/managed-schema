@@ -118,7 +118,7 @@
   <field name="embarked" type="string" indexed="true" stored="true" required="false" multiValued="true" />
 
 
-  <uniqueKey>Passenger</uniqueKey>
+  <uniqueKey>passenger_id</uniqueKey>
 
 
   <fieldType name="string" class="solr.StrField" sortMissingLast="true" docValues="true" />
