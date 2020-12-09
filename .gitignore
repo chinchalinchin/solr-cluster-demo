@@ -1,0 +1,5 @@
+*.pyc
+env/
+!env/.sample.env
+app/static/*
+frontend/node_modules/*

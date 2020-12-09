@@ -1,0 +1,15 @@
+CREATE TABLE solr_titanic ( passenger_id INTEGER,
+                            survived TEXT,
+                            p_class TEXT,
+                            last_name TEXT,
+                            first_name TEXT,
+                            sex TEXT,
+                            age TEXT,
+                            sib_sp TEXT,
+                            parch TEXT,
+                            ticket TEXT,
+                            fare TEXT,
+                            cabin TEXT, 
+                            embarked TEXT,
+                            PRIMARY KEY (passenger_id)
+)

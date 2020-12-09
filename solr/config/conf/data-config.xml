@@ -1,0 +1,23 @@
+<dataConfig>
+   <dataSource driver="org.postgresql.Driver" url="jdbc:postgresql://db:5432/solr_db" user="postgres" password="root" />
+
+
+	<document name="titanic">
+        <entity name="titanic_passengers" query="SELECT * FROM solr_titanic;" >
+
+            <field column="passenger_id" name="ID" />
+			<field column="survived" name="Survival Status" />
+            <field column="p_class" name="P Class" />
+            <field column="last_name" name="Last Name" />
+            <field column="first_name" name="First Name" />
+            <field column="sex" name="Sex" />
+            <field column="age" name="Age" />
+            <field column="sib_sp" name="Sib Sp" />
+            <field column="parch" name="Parch" />
+            <field column="ticket" name="contbegdt" />
+            <field column="cabin" name="cabin" />
+            <field column="embarked" name="embarked" />
+            
+        </entity>
+    </document>
+</dataConfig>

@@ -1,0 +1,13 @@
+applications:
+    - name: titanic-solr
+path: ./
+buildpack: https://github.com/cloudfoundry/python-buildpack.git
+stack: cflinuxfs3
+disk_quota: 500M
+memory: 250M
+command: bash ./scripts/bootstrap.sh
+env:
+    APP_ENV: cloud
+    ANGULAR_VERSION: 11
+    NODE_VERSION: 14
+    PYTHON_VERSION: 3.7.7

@@ -1,0 +1,113 @@
+version: "3.8"
+services:
+    # WRAPPER
+    web:
+        build: ./
+        ports:
+            - "8000:8000"
+        networks:
+            - solr
+        depends_on:
+            - solr1
+            - solr2
+            - solr3
+        env_file:
+            - ./env/container.env
+        command: ["bash", "./bootstrap.sh","container"]
+
+    # DATASOURCE
+    db:
+        build: ./db
+        ports: 
+            - "5432:5432"
+        networks:
+            - solr
+        env_file:
+            - ./env/container.env 
+
+    # SOLR CLUSTER
+    solr1:
+        build: ./solr
+        ports: 
+            - "8981:8981"
+        networks:
+            - solr
+        depends_on:
+            - zook1
+            - zook2
+            - zook3
+        env_file:
+            - ./env/container.env 
+        environment:
+            SOLR_PORT: 8981
+    solr2:
+        build: ./solr
+        ports: 
+            - "8982:8982"
+        networks:
+            - solr
+        depends_on:
+            - zook1
+            - zook2
+            - zook3
+        env_file:
+            - ./env/container.env
+        environment:
+            SOLR_PORT: 8982
+    solr3:
+        build: ./solr
+        ports: 
+            - "8983:8983"
+        networks:
+            - solr
+        depends_on:
+            - zook1
+            - zook2
+            - zook3
+        env_file:
+            - ./env/container.env  
+        environment:
+            SOLR_PORT: 8983
+    
+    # ZOOKEEPER CLUSTER
+    zook1:
+        build: ./zook/
+        restart: always
+        ports:
+            - 2181:2181
+        networks:
+            - solr
+        environment:
+            ZOO_PORT: 2181
+            ZOO_MY_ID: 1
+            ZOO_4LW_COMMANDS_WHITELIST: mntr,conf,ruok
+            ZOO_SERVERS: server.1=zook1:2888:3888;2181 server.2=zook2:2888:3888;2181 server.3=zook3:2888:3888;2181
+    zook2:
+        build: ./zook/
+        restart: always
+        ports:
+            - 2182:2182
+        networks:
+            - solr
+        environment:
+            ZOO_PORT: 2182
+            ZOO_MY_ID: 2
+            ZOO_4LW_COMMANDS_WHITELIST: mntr,conf,ruok
+            ZOO_SERVERS: server.1=zook1:2888:3888;2181 server.2=zook2:2888:3888;2181 server.3=zook3:2888:3888;2181
+    zook3:
+        build: ./zook/
+        restart: always
+        ports:
+            - 2183:2183
+        networks: 
+            - solr
+        environment:
+            ZOO_PORT: 2183
+            ZOO_MY_ID: 3
+            ZOO_4LW_COMMANDS_WHITELIST: mntr,conf,ruok
+            ZOO_SERVERS: server.1=zook1:2888:3888;2181 server.2=zook2:2888:3888;2181 server.3=zook3:2888:3888;2181
+            
+networks:
+    solr:
+    
+        

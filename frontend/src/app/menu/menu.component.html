@@ -1,0 +1,4 @@
+<div class="btn-group-vertical" role="group">
+    <a *ngFor = "let item of menu | keyvalue" 
+         class="btn btn-default" routerLink="/{{item.value}}">{{item.value}}</a>
+</div>

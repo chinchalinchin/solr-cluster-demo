@@ -1,0 +1,15 @@
+# BUILD AND INITIALIZATION PROCESS
+
+# Build Application Image and Bring Cluster Up
+./scripts/build-container.sh && docker-compose up
+
+# Install Dataimport Handler
+    # Q: Can this be done through the API?
+./scripts/solr/init.sh
+
+# ! LOCAL ONLY !
+# Import data into database
+./scripts/db/cmds/import-data.sh
+
+# Call API to index?
+# webapp=/solr path=/dataimport params={indent=on&_forwardedCount=1&wt=json&command=status&_=1607347263250} status=0 QTime=1
